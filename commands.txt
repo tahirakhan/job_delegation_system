@@ -1,0 +1,6 @@
+docker build -t your-spring-boot-image:tag . 
+docker tag  your-spring-boot-image:tag sigmaprofil/your-spring-boot-image 
+ docker buildx build --platform linux/amd64 -t sigmaprofil/your-spring-boot-image --push .
+ terraform apply
+ terraform destroy
+ aws ec2 get-console-output --instance-id i-0b64299fd70892670
