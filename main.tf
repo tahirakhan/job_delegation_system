@@ -1,7 +1,8 @@
+#CHANGE_ME ACCESS_KEY     SECRET_KEY   REGION_ID
 provider "aws" {
-  region     = "us-east-1"
-  access_key = "PROVIDE_YOUR_ACCESS_KEY_HERE"
-  secret_key = "PROVIDE_YOUR_ACCESS_SECRET_HERE"
+  region     = "REGION_ID"
+  access_key = "ACCESS_KEY"
+  secret_key = "SECRET_KEY"
 }
 
 resource "aws_vpc" "prod-vpc" {
@@ -104,7 +105,7 @@ resource "aws_network_interface" "web-server-nic" {
 }
 
 resource "aws_eip" "one" {
-  instance = aws_instance.job-delegation-system.id
+  instance                  = aws_instance.job-delegation-system.id
   network_interface         = aws_network_interface.web-server-nic.id
   associate_with_private_ip = "10.0.1.50"
   depends_on                = [aws_internet_gateway.gw]
@@ -115,7 +116,7 @@ resource "aws_instance" "job-delegation-system" {
   instance_type     = "t2.micro"
   availability_zone = "us-east-1a"
   key_name          = "main-key"
-  
+
   network_interface {
     device_index         = 0
     network_interface_id = aws_network_interface.web-server-nic.id
